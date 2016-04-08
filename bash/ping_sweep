@@ -19,6 +19,7 @@
 #			Script Optimizado
 #
 #
+
 ip=$(ip addr show eth0 | grep "inet [1-254]\(.\)" | awk -F ' ' ' {print $2; }')
 for i in `seq 1 254`;do
 	ping "${ip%.*}.$i" -c 1 | grep "time=" | cut -d ":" -f 1 | cut -d " " -f 4
