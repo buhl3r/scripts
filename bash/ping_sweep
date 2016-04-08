@@ -1,0 +1,25 @@
+#!/bin/bash
+#####################################################################################################
+#                                
+#                   PRIMEIRO
+#
+#                                
+#first=$(ip addr show eth0 | grep "inet [1-254]\(.\)" | awk -F ' ' ' {print $2; }' | cut -d "." -f1)
+#second=$(ip addr show eth0 | grep "inet [1-254]\(.\)" | awk -F ' ' ' {print $2; }' | cut -d "." -f2)
+#third=$(ip addr show eth0 | grep "inet [1-254]\(.\)" | awk -F ' ' ' {print $2; }' | cut -d "." -f3)
+#
+#
+#for i in `seq 1 254`;do
+#        ping "$first.$second.$third.$i" -c 1 | grep "time=" | cut -d ":" -f 1 | cut -d " " -f 4
+#done
+#
+#####################################################################################################
+#
+#
+#			Script Optimizado
+#
+#
+ip=$(ip addr show eth0 | grep "inet [1-254]\(.\)" | awk -F ' ' ' {print $2; }')
+for i in `seq 1 254`;do
+	ping "${ip%.*}.$i" -c 1 | grep "time=" | cut -d ":" -f 1 | cut -d " " -f 4
+done
